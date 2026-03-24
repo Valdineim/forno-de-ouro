@@ -8,27 +8,47 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-body { margin:0; font-family:Arial; background:#d4af37; }
+body {
+margin:0;
+font-family:Arial;
+background:#d4af37;
+overflow-x:hidden; /* 🔥 REMOVE BARRA LATERAL */
+}
 
-/* MENU */
+/* MENU BOTÃO */
 .menu-btn {
-position:fixed; top:15px; left:15px;
-background:#fff; color:#111;
-width:50px; height:50px;
-display:flex; align-items:center; justify-content:center;
-border-radius:10px; font-size:26px; cursor:pointer;
+position:fixed;
+top:15px;
+left:15px;
+background:#fff;
+color:#111;
+width:50px;
+height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:10px;
+font-size:26px;
+cursor:pointer;
 z-index:1001;
 }
 
+/* MENU ESCONDIDO */
 .menu {
-position:fixed; top:0; left:-260px;
-width:260px; height:100%;
-background:#111; padding:80px 20px;
-transition:.3s;
+position:fixed;
+top:0;
+left:-300px; /* 🔥 ESCONDE TOTAL */
+width:260px;
+height:100%;
+background:#111;
+padding:80px 20px;
+transition:0.3s;
 z-index:1000;
 }
 
-.menu.active { left:0; }
+.menu.active {
+left:0;
+}
 
 .menu a {
 display:flex;
@@ -40,26 +60,28 @@ border-bottom:1px solid #222;
 text-decoration:none;
 }
 
-/* CONTAINER */
-.container {
+/* LOGO */
+.logo-container {
 max-width:1300px;
-margin:auto;
-padding:10px;
+margin:0 auto 10px;
+padding:3px;
 }
 
-/* LOGO */
 .logo-container img {
 width:100%;
 height:300px;
 object-fit:cover;
+object-position:center 59%;
 border-radius:10px;
 }
 
 /* BIO */
 .bio {
+max-width:1300px;
+margin:15px auto;
+padding:10px;
 background:#fff;
 border-radius:10px;
-padding:10px;
 text-align:center;
 }
 
@@ -68,25 +90,40 @@ text-align:center;
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:10px;
+padding:6px;
+max-width:1300px;
+margin:0 auto;
 }
 
+/* CARD */
 .card {
 background:#fff;
+border-radius:10px;
 padding:10px;
-border-radius:8px;
 text-align:center;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* IMAGEM */
+.img-box {
+width:100%;
+aspect-ratio:1/1;
+overflow:hidden;
+border-radius:8px;
+cursor:pointer;
 }
 
 .img-box img {
 width:100%;
-border-radius:6px;
-cursor:pointer;
+height:100%;
+object-fit:cover;
 }
 
 /* QTD */
 .qtd-container {
 display:flex;
 justify-content:center;
+align-items:center;
 gap:8px;
 margin:10px 0;
 }
@@ -97,13 +134,18 @@ height:35px;
 border:none;
 background:#d4af37;
 color:#fff;
+font-size:18px;
 border-radius:6px;
 cursor:pointer;
 }
 
 .qtd-container input {
 width:50px;
+height:35px;
 text-align:center;
+border:1px solid #ccc;
+border-radius:6px;
+font-weight:bold;
 }
 
 /* BOTÃO */
@@ -112,6 +154,7 @@ background:#25d366;
 color:#fff;
 padding:10px;
 border-radius:8px;
+font-weight:bold;
 cursor:pointer;
 }
 
@@ -124,7 +167,7 @@ left:0;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.95);
-z-index:9999;
+z-index:3000;
 justify-content:center;
 align-items:center;
 }
@@ -135,25 +178,18 @@ max-height:80%;
 border-radius:10px;
 }
 
-#lightbox button {
+.lb-btn {
 position:absolute;
-background:rgba(0,0,0,0.6);
-border:none;
 color:#fff;
-font-size:30px;
-padding:10px;
+font-size:40px;
 cursor:pointer;
-border-radius:8px;
 }
 
-.lb-close { top:20px; right:20px; }
-.lb-prev { left:10px; top:50%; transform:translateY(-50%); }
-.lb-next { right:10px; top:50%; transform:translateY(-50%); }
+.lb-close { top:20px; right:30px; }
+.lb-prev { left:20px; top:50%; transform:translateY(-50%); }
+.lb-next { right:20px; top:50%; transform:translateY(-50%); }
 
-/* MAPA */
-.mapa { margin-top:20px; }
-
-/* FLOAT */
+/* WHATS FLOAT */
 .float-zap {
 position:fixed;
 bottom:20px;
@@ -169,12 +205,6 @@ justify-content:center;
 font-size:28px;
 text-decoration:none;
 }
-
-/* MOBILE */
-@media (max-width:768px){
-.produtos { grid-template-columns:repeat(2,1fr); }
-.logo-container img { height:220px; }
-}
 </style>
 </head>
 
@@ -183,45 +213,40 @@ text-decoration:none;
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <nav class="menu" id="menu">
-<a href="#">Início</a>
-<a href="quem-somos.html">Quem Somos</a>
-<a href="https://www.facebook.com/" target="_blank">Facebook</a>
-<a href="https://www.instagram.com/" target="_blank">Instagram</a>
-<a href="https://www.tiktok.com/" target="_blank">TikTok</a>
-<a href="tel:+5516997106341">Ligar</a>
-<a href="https://wa.me/5516997106341" target="_blank">WhatsApp</a>
+<a href="#"><i class="fa-solid fa-house"></i> Início</a>
+<a href="quem-somos.html"><i class="fa-solid fa-users"></i> Quem Somos</a>
+<a href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+<a href="https://www.instagram.com/fornodeourosalgados/" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>
+<a href="https://www.tiktok.com/" target="_blank"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+<a href="tel:+5516997106341"><i class="fa-solid fa-phone"></i> Ligar</a>
+<a href="https://wa.me/5516997106341" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
 </nav>
 
-<div class="container logo-container">
+<div class="logo-container">
 <img src="loja.jpg">
 </div>
 
-<div class="container">
 <div class="bio">
 <h2>Forno de Ouro Salgados</h2>
-<p>Fábrica de salgados congelados e assados</p>
-<p><i class="fa-brands fa-whatsapp"></i> 5516997106341</p>
-</div>
+<h3>Fábrica de salgados congelados, crus, fritos e assados, croissants, pães de queijo tradicionais, gourmets e recheados!</h3>
+
+<p>
+<a href="https://wa.me/5516997106341" target="_blank" style="color:#25d366;">
+<i class="fa-brands fa-whatsapp"></i> 5516997106341
+</a>
+</p>
+
+<p>📍 Rua dos Inconfidentes 86, São Carlos - SP</p>
 </div>
 
-<div class="container">
 <div class="produtos" id="grid"></div>
-</div>
 
 <!-- LIGHTBOX -->
 <div id="lightbox">
-<button class="lb-close" onclick="closeLightbox()">✕</button>
-<button class="lb-prev" onclick="changeImage(-1)">❮</button>
+<span class="lb-btn lb-close" onclick="closeLightbox()">✕</span>
+<span class="lb-btn lb-prev" onclick="changeImage(-1)">❮</span>
 <img id="lightbox-img">
-<button class="lb-next" onclick="changeImage(1)">❯</button>
-</div>
-
-<!-- MAPA -->
-<div class="container mapa">
-<h2>📍 Localização</h2>
-<iframe 
-src="https://www.google.com/maps?q=Rua+dos+Inconfidentes+86,+São+Carlos,+SP&output=embed"
-width="100%" height="300"></iframe>
+<span class="lb-btn lb-next" onclick="changeImage(1)">❯</span>
 </div>
 
 <a href="https://wa.me/5516997106341" class="float-zap">
@@ -232,7 +257,6 @@ width="100%" height="300"></iframe>
 
 let numero = "5516997106341";
 let currentImg = 1;
-let totalImgs = 30;
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
@@ -241,14 +265,13 @@ document.getElementById("menu").classList.toggle("active");
 window.onload = function(){
 const grid = document.getElementById("grid");
 
-for(let i=1;i<=totalImgs;i++){
+for(let i=1;i<=30;i++){
 let card = document.createElement("div");
 card.className="card";
 
 card.innerHTML = `
-<div class="img-box">
-<img src="salgado${i}.jpg" onclick="openLightbox(${i})"
-onerror="this.src='https://via.placeholder.com/300'">
+<div class="img-box" onclick="openLightbox(${i})">
+<img src="salgado${i}.jpg" onerror="this.src='https://via.placeholder.com/300'">
 </div>
 
 <div class="qtd-container">
@@ -278,10 +301,8 @@ document.getElementById("lightbox").style.display = "none";
 
 function changeImage(dir){
 currentImg += dir;
-
-if(currentImg > totalImgs) currentImg = 1;
-if(currentImg < 1) currentImg = totalImgs;
-
+if(currentImg > 30) currentImg = 1;
+if(currentImg < 1) currentImg = 30;
 document.getElementById("lightbox-img").src = `salgado${currentImg}.jpg`;
 }
 

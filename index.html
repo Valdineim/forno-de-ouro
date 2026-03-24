@@ -11,7 +11,7 @@
 body {
 margin:0;
 font-family:Arial;
-background:#d4af37;
+background:linear-gradient(180deg, #d4af37, #8b6508);
 overflow-x:hidden;
 }
 
@@ -59,27 +59,28 @@ text-decoration:none;
 
 /* LOGO */
 .logo-container {
-max-width:1300px;
-margin:0 auto 10px;
-padding:3px;
+max-width:900px;
+margin:20px auto;
+padding:5px;
 }
 
 .logo-container img {
 width:100%;
-height:300px;
+height:220px;
 object-fit:cover;
-object-position:center 59%;
-border-radius:10px;
+border-radius:15px;
 }
 
-/* BIO AJUSTADA */
+/* BIO */
 .bio {
 max-width:900px;
 margin:20px auto;
 padding:20px;
-background:#fff;
+background:#1f1f1f;
 border-radius:15px;
 text-align:center;
+color:#fff;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
 .bio h2 {
@@ -91,13 +92,13 @@ font-weight:normal;
 line-height:1.5;
 }
 
-/* GRID */
+/* GRID RESPONSIVO */
 .produtos {
 display:grid;
 grid-template-columns:repeat(3,1fr);
-gap:12px;
+gap:15px;
 padding:10px;
-max-width:1300px;
+max-width:1200px;
 margin:0 auto;
 }
 
@@ -110,14 +111,13 @@ text-align:center;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-height:100%;
 box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
 
 /* IMAGEM */
 .img-box {
 width:100%;
-height:220px;
+height:200px;
 overflow:hidden;
 border-radius:8px;
 cursor:pointer;
@@ -168,6 +168,38 @@ font-weight:bold;
 cursor:pointer;
 }
 
+/* MAPA */
+.mapa-container {
+max-width:900px;
+margin:20px auto;
+padding:10px;
+text-align:center;
+}
+
+.mapa-container iframe {
+width:100%;
+height:300px;
+border-radius:10px;
+border:none;
+}
+
+/* WHATS FLOAT */
+.float-zap {
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+color:#fff;
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+text-decoration:none;
+}
+
 /* LIGHTBOX */
 #lightbox {
 display:none;
@@ -199,36 +231,25 @@ cursor:pointer;
 .lb-prev { left:20px; top:50%; transform:translateY(-50%); }
 .lb-next { right:20px; top:50%; transform:translateY(-50%); }
 
-/* WHATS */
-.float-zap {
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25d366;
-color:#fff;
-width:60px;
-height:60px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:28px;
-text-decoration:none;
+/* 📱 RESPONSIVO */
+@media (max-width: 900px){
+.produtos {
+grid-template-columns:repeat(2,1fr);
+}
 }
 
-/* MAPA AJUSTADO */
-.mapa-container {
-max-width:900px;
-margin:20px auto;
-padding:10px;
-text-align:center;
+@media (max-width: 500px){
+.produtos {
+grid-template-columns:1fr;
 }
 
-.mapa-container iframe {
-width:100%;
-height:300px;
-border-radius:10px;
-border:none;
+.logo-container img {
+height:180px;
+}
+
+.bio h3 {
+font-size:16px;
+}
 }
 </style>
 </head>
@@ -239,7 +260,7 @@ border:none;
 
 <nav class="menu" id="menu">
 <a href="#"><i class="fa-solid fa-house"></i> Início</a>
-<a href="quem-somos.html"><i class="fa-solid fa-users"></i> Quem Somos</a>
+<a href="#"><i class="fa-solid fa-users"></i> Quem Somos</a>
 <a href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
 <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
 <a href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
@@ -258,16 +279,12 @@ Salgados congelados de alta qualidade, prontos para fritar, assar ou vender.<br>
 Croissants e pães de queijo tradicionais, gourmet e recheados que conquistam qualquer cliente.
 </h3>
 
-<p>
-<i class="fa-brands fa-whatsapp"></i> 55 16 99710-6341
-</p>
-
+<p><i class="fa-brands fa-whatsapp"></i> 55 16 99710-6341</p>
 <p>📍 Rua dos Inconfidentes, 86 - São Carlos/SP</p>
 </div>
 
 <div class="produtos" id="grid"></div>
 
-<!-- LIGHTBOX -->
 <div id="lightbox">
 <span class="lb-btn lb-close" onclick="closeLightbox()">✕</span>
 <span class="lb-btn lb-prev" onclick="changeImage(-1)">❮</span>
@@ -336,14 +353,9 @@ el.value=v;
 }
 </script>
 
-<!-- MAPA -->
 <div class="mapa-container">
-<h2 style="color:#111;">📍 Nossa Localização</h2>
-
-<iframe 
-src="https://www.google.com/maps?q=Rua+dos+Inconfidentes+86,+São+Carlos,+SP&output=embed"
-loading="lazy">
-</iframe>
+<h2>📍 Nossa Localização</h2>
+<iframe src="https://www.google.com/maps?q=Rua+dos+Inconfidentes+86,+São+Carlos,+SP&output=embed"></iframe>
 </div>
 
 </body>

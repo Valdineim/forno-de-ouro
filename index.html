@@ -40,13 +40,16 @@ border-bottom:1px solid #222;
 text-decoration:none;
 }
 
-/* LOGO */
-.logo-container {
+/* 🔥 PADRÃO ALINHADO */
+.container {
+width:100%;
 max-width:1300px;
-margin:0 auto 10px;
-padding:3px;
+margin:0 auto;
+padding:10px;
+box-sizing:border-box;
 }
 
+/* LOGO */
 .logo-container img {
 width:100%;
 height:300px;
@@ -57,12 +60,10 @@ border-radius:10px;
 
 /* BIO */
 .bio {
-max-width:1300px;
-margin:15px auto;
-padding:3px;
 background:#ffffff;
 border-radius:10px;
 text-align:center;
+padding:10px;
 }
 
 /* GRID */
@@ -70,11 +71,9 @@ text-align:center;
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:10px;
-padding:6px;
-max-width:1300px;
-margin:0 auto;
 }
 
+/* CARD */
 .card {
 background:#fff;
 border-radius:8px;
@@ -134,11 +133,6 @@ padding:10px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
-transition:0.2s;
-}
-
-.btn-whats:hover {
-background:#1ebe5d;
 }
 
 /* LIGHTBOX */
@@ -153,35 +147,27 @@ justify-content:center;
 align-items:center;
 }
 
-/* 🔥 AJUSTE PRA NÃO BLOQUEAR CLIQUE */
 #lightbox img {
 max-width:90%;
 max-height:80%;
 pointer-events:none;
 }
 
-/* 🔥 BOTÕES CORRIGIDOS */
 .lb-btn {
 position:absolute;
 color:#fff;
 font-size:45px;
 cursor:pointer;
 z-index:4000;
-user-select:none;
 }
 
 .lb-close { top:20px; right:30px; }
+.lb-prev { left:20px; top:50%; transform:translateY(-50%); }
+.lb-next { right:20px; top:50%; transform:translateY(-50%); }
 
-.lb-prev {
-left:20px;
-top:50%;
-transform:translateY(-50%);
-}
-
-.lb-next {
-right:20px;
-top:50%;
-transform:translateY(-50%);
+/* MAPA */
+.mapa {
+margin-top:20px;
 }
 
 /* FLOAT */
@@ -200,6 +186,19 @@ justify-content:center;
 font-size:28px;
 text-decoration:none;
 }
+
+/* 🔥 RESPONSIVO */
+@media (max-width:768px){
+
+.produtos {
+grid-template-columns:repeat(2,1fr);
+}
+
+.logo-container img {
+height:220px;
+}
+
+}
 </style>
 </head>
 
@@ -217,10 +216,13 @@ text-decoration:none;
 <a href="https://wa.me/5516997106341" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
 </nav>
 
-<div class="logo-container">
+<!-- LOGO -->
+<div class="container logo-container">
 <img src="loja.jpg">
 </div>
 
+<!-- BIO -->
+<div class="container">
 <div class="bio">
 <h2>Forno de Ouro Salgados</h2>
 <h3>Fábrica de salgados congelados, crus, fritos e assados, croissants, pães de queijo tradicionais, gourmets e recheados!</h3>
@@ -233,14 +235,32 @@ text-decoration:none;
 
 <p>📍 Rua dos Inconfidentes 86, São Carlos - SP</p>
 </div>
+</div>
 
+<!-- PRODUTOS -->
+<div class="container">
 <div class="produtos" id="grid"></div>
+</div>
 
+<!-- LIGHTBOX -->
 <div id="lightbox">
 <span class="lb-btn lb-close" onclick="closeLightbox()">✕</span>
 <span class="lb-btn lb-prev" onclick="changeImage(-1)">❮</span>
 <img id="lightbox-img">
 <span class="lb-btn lb-next" onclick="changeImage(1)">❯</span>
+</div>
+
+<!-- MAPA -->
+<div class="container mapa">
+<h2 style="text-align:center;">📍 Nossa Localização</h2>
+
+<iframe 
+src="https://www.google.com/maps?q=Rua+dos+Inconfidentes+86,+São+Carlos,+SP&output=embed"
+width="100%" 
+height="300" 
+style="border:0; border-radius:10px;">
+</iframe>
+
 </div>
 
 <a href="https://wa.me/5516997106341" class="float-zap">
@@ -314,20 +334,6 @@ window.open(`https://wa.me/${numero}?text=${msg}`);
 }
 
 </script>
-
-<!-- MAPA -->
-<div style="max-width:1300px; margin:20px auto; padding:10px;">
-<h2 style="text-align:center; color:#111;">📍 Nossa Localização</h2>
-
-<iframe 
-src="https://www.google.com/maps?q=Rua+dos+Inconfidentes+86,+São+Carlos,+SP&output=embed"
-width="100%" 
-height="300" 
-style="border:0; border-radius:10px;" 
-loading="lazy">
-</iframe>
-
-</div>
 
 </body>
 </html>
